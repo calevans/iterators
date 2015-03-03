@@ -4,9 +4,7 @@ namespace Iterators\Command;
 use Iterators\Classes\IteratorDemo;
  
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface as OutputInterface;
 
 class IteratorInterfaceCommand extends Command
@@ -24,6 +22,10 @@ class IteratorInterfaceCommand extends Command
 							   OutputInterface $output)
 	{
 		$iteratableClass = new \Iterators\Classes\IteratorDemo();
+
+		if ($output->getVerbosity()>=OutputInterface::VERBOSITY_VERBOSE) {
+    		$iteratableClass->setVerbose(true);
+		}
 
 		$output->writeln("Looks like we've got " . count($iteratableClass) . " recent committers.");
 

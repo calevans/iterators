@@ -5,9 +5,9 @@ class IteratorDemo implements  \Iterator, \Countable
 {
 	
 	protected $committers = [];
+	protected $verbose    = false;
+	protected $pointer    = -1;
 
-	protected $pointer   = -1;
-	
 	public function __construct()
 	{
 		\Guzzle\Http\StaticClient::mount();
@@ -19,18 +19,27 @@ class IteratorDemo implements  \Iterator, \Countable
 
 	public function count()
 	{
+		if ($this->verbose) {
+			echo "-- Count\n";
+		}
 		return count($this->committers);
 	}
 
 
 	public function key()
 	{
+		if ($this->verbose) {
+			echo "-- Key\n";
+		}
 		return $this->pointer;
 	}
 
 
 	public function next()
 	{
+		if ($this->verbose) {
+			echo "-- Next\n";
+		}
 		$this->pointer++;
 		if ($this->valid()) {
 			$this->committers[$this->pointer]['location'] = $this->fetchLocation($this->pointer);	
@@ -42,6 +51,9 @@ class IteratorDemo implements  \Iterator, \Countable
 
 	public function rewind()
 	{
+		if ($this->verbose) {
+			echo "-- Rewind\n";
+		}
 		$this->pointer=0;
 
 		if (count($this->committers>0)) {
@@ -54,12 +66,19 @@ class IteratorDemo implements  \Iterator, \Countable
 
 	public function valid()
 	{
+		if ($this->verbose) {
+			echo "-- Valid\n";
+		}
+
 		return isset($this->committers[$this->pointer]);
 	}
 
 
 	public function current()
 	{
+		if ($this->verbose) {
+			echo "-- Current\n";
+		}
 		return $this->committers[$this->pointer];
 	}
 
@@ -69,6 +88,9 @@ class IteratorDemo implements  \Iterator, \Countable
 	 */
 	protected function checkCommiters($email)
 	{
+		if ($this->verbose) {
+			echo "-- Check Committers\n";
+		}
 		$returnValue = false;
 		foreach($this->committers as $commiter) {
 			if ($commiter['email']===$email) {
@@ -84,6 +106,10 @@ class IteratorDemo implements  \Iterator, \Countable
 
 	protected function populate()
 	{
+		if ($this->verbose) {
+			echo "-- Populate\n";
+		}
+
 		$response = \Guzzle::get('https://api.github.com/repos/php/php-src/commits');
 		$commits = $response->json();
 		
@@ -105,6 +131,9 @@ class IteratorDemo implements  \Iterator, \Countable
 
 	protected function fetchLocation($pointer)
 	{
+		if ($this->verbose) {
+			echo "-- Fetch Location\n";
+		}
 		$returnValue = '';
 		if (empty($this->committers[$pointer]['id'])) {
 			return 'Unknown';
@@ -119,4 +148,12 @@ class IteratorDemo implements  \Iterator, \Countable
 		}
 		return $returnValue;
 	}
+
+
+	public function setVerbose($newValue=false)
+	{
+		$this->verbose = (bool)$newValue;
+		return;
+	}
+
 }
