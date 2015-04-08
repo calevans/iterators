@@ -8,8 +8,8 @@
         }
     ],
     "require": {
-        "symfony/console": "~2.3",
-        "guzzle/guzzle": "~3.7"
+        "symfony/console": "dev-master",
+        "guzzle/guzzle": "dev-master"
     },
 "autoload": {
         "psr-0": {
