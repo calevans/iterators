@@ -1,9 +1,5 @@
 <?PHP
 namespace Iterators\Command;
-
-use Iterators\Classes\OuterIteratorDemo;
-use Iterators\Classes\CustomCachingIterator;
-use Iterators\Classes\CustomArrayIterator;
  
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -12,8 +8,6 @@ use Symfony\Component\Console\Output\OutputInterface as OutputInterface;
 
 class GeneratorCommand extends Command
 {
-    protected $commits    = [];
-    protected $committers = [];
 
     protected function configure()
     {
@@ -29,12 +23,21 @@ class GeneratorCommand extends Command
     {
         \Guzzle\Http\StaticClient::mount();
 
-        $this->commits = \Guzzle::get('https://api.github.com/repos/php/php-src/commits')->json();
-        $commitGenerator = $this->gatherCommits();
-print_r($commitGenerator);
-die();
+        $commits = \Guzzle::get('https://api.github.com/repos/php/php-src/commits')->json();
+        $commitGenerator = $this->gatherCommits($commits,$output->getVerbosity());
+
+        /*
+         * If the verbose flag is passed, prove that generators are an object.
+         */
+        if ($output->getVerbosity()===OutputInterface::VERBOSITY_DEBUG) {
+            print_r($commitGenerator);
+            print_r(class_implements($commitGenerator));
+            $output->writeln("Done");
+            return;            
+        } 
+
         foreach( $commitGenerator as $thisCommit) {
-            echo $thisCommit['committer']['name'] . " : " . $thisCommit['committer']['location'] . "\n" . $thisCommit['commit']['commit']['message'] ."\n\n";
+            echo $thisCommit['committer']['name'] . " : " . $thisCommit['committer']['location']. "\n";
         }
 
         $output->writeln("Done");
@@ -43,25 +46,29 @@ die();
 
 
 
-    protected function gatherCommits()
+    protected function gatherCommits($gatheredComits,$verbosity)
     {
         $committers = [];
 
-        foreach($this->commits as $thisCommit) {
+        foreach($gatheredComits as $thisCommit) {
 
             if (!isset($committers[$thisCommit['author']['id']])) {
-              $committers[$thisCommit['author']['id']] = $this->getAuthor($thisCommit['author']['id']);
+              $committers[$thisCommit['author']['id']] = \Guzzle::get('https://api.github.com/user/'.$thisCommit['author']['id'])->json();
             }
 
             $payload = ['commit' =>$thisCommit,'committer'=>$committers[$thisCommit['author']['id']]];
 
+            if ($verbosity===OutputInterface::VERBOSITY_VERBOSE) {
+                echo "Pre Yeild\n";
+            }
+            
             yield $payload;
+
+            if ($verbosity===OutputInterface::VERBOSITY_VERBOSE) {
+                echo "Post Yeild\n";
+            }
+            
         }
     }
-
-
-    protected function getAuthor($id)
-    {
-        return \Guzzle::get('https://api.github.com/user/'.$id)->json();
-    }
 }
+
