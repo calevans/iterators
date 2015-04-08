@@ -8,11 +8,12 @@
         }
     ],
     "require": {
-        "symfony/console": "dev-master",
-        "guzzle/guzzle": "dev-master"
+        "symfony/console": "~2.0",
+        "guzzle/guzzle": "~5.0"
     },
-"autoload": {
+    "autoload": {
         "psr-0": {
-                   "Iterators": "app/"}
+            "Iterators": "app/"
         }
+    }
 }
