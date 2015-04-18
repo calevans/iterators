@@ -7,7 +7,7 @@ class Miata implements \ArrayAccess
     public function __construct()
     {
         $data['cylinders'] = 4;
-        $data['color'] = black;
+        $data['color'] = 'black';
         $data['doors'] = 2;
         $data['transmission'] = 'manual';
         $data['convertable'] = true;
@@ -16,7 +16,7 @@ class Miata implements \ArrayAccess
 
     public function offsetSet($key, $value)
     {
-        if (is_set($this->data[$key])) {
+        if (isset($this->data[$key])) {
             $this->data[$key] = $value;
         }
         return;
