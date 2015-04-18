@@ -1,6 +1,8 @@
 <?php
 namespace Iterators\Command;
 
+use Iterators\Classes\FizzBuzz;
+use Iterators\Classes\FizzBuzzFilter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -29,13 +31,13 @@ class FizzBuzzFilteredCommand extends Command
         $max = max((int)$input->getOption('max'), 1);
         $numbers = range(1, $max);
 
-        $fizzBuzzFiltered = new \Iterators\Classes\FizzBuzzFilter();
+        $fizzBuzzFiltered = new FizzBuzzFilter();
 
         foreach ($numbers as $thisNumber) {
             $fizzBuzzFiltered[] = $thisNumber;
         }
 
-        $fizzBuzz = new \Iterators\Classes\FizzBuzz($fizzBuzzFiltered);
+        $fizzBuzz = new FizzBuzz($fizzBuzzFiltered);
 
         foreach ($fizzBuzz as $thisNumber) {
             $output->writeln("  " . $thisNumber);

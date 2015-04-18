@@ -1,6 +1,7 @@
 <?php
 namespace Iterators\Command;
 
+use Iterators\Classes\FizzBuzz;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -29,7 +30,7 @@ class FizzBuzzCommand extends Command
         $max = max((int)$input->getOption('max'), 1);
         $numbers = range(1, $max);
 
-        $fizzBuzz = new \Iterators\Classes\FizzBuzz($numbers);
+        $fizzBuzz = new FizzBuzz($numbers);
 
         foreach ($fizzBuzz as $thisNumber) {
             $output->writeln("  " . $thisNumber);

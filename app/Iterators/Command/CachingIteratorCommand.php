@@ -5,7 +5,6 @@ use Iterators\Classes\CustomArrayIterator;
 use Iterators\Classes\CustomCachingIterator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface as OutputInterface;
 
 class CachingIteratorCommand extends Command
