@@ -1,6 +1,8 @@
 <?php
 namespace Iterators\Classes;
 
+use GuzzleHttp\Client;
+
 class IteratorDemo implements \Iterator, \Countable
 {
 
@@ -10,7 +12,6 @@ class IteratorDemo implements \Iterator, \Countable
 
     public function __construct()
     {
-        \Guzzle\Http\StaticClient::mount();
         $this->populate();
         $this->rewind();
         return;
@@ -110,7 +111,8 @@ class IteratorDemo implements \Iterator, \Countable
             echo "-- Populate\n";
         }
 
-        $response = \Guzzle::get('https://api.github.com/repos/php/php-src/commits');
+        $client = new Client();
+        $response = $client->get('https://api.github.com/repos/php/php-src/commits');
         $commits = $response->json();
 
         foreach ($commits as $thisCommit) {
@@ -136,13 +138,13 @@ class IteratorDemo implements \Iterator, \Countable
         if ($this->verbose) {
             echo "-- Fetch Location\n";
         }
-        $returnValue = '';
         if (empty($this->committers[$pointer]['id'])) {
             return 'Unknown';
         }
 
         if (!isset($this->committers[$pointer]['location'])) {
-            $response = \Guzzle::get('https://api.github.com/user/' . $this->committers[$pointer]['id']);
+            $client = new Client();
+            $response = $client->get('https://api.github.com/user/' . $this->committers[$pointer]['id']);
             $githubUser = $response->json();
             $returnValue = $githubUser['location'];
         } else {
