@@ -56,7 +56,7 @@ class IteratorDemo implements \Iterator, \Countable
         }
         $this->pointer = 0;
 
-        if (count($this->committers > 0)) {
+        if (count($this->committers) > 0) {
             $this->committers[$this->pointer]['location'] = $this->fetchLocation($this->pointer);
         }
 
