@@ -1,4 +1,4 @@
-<?PHP
+<?php
 namespace Iterators\Classes;
 
 class SeekableIterator implements \Iterator, \Countable

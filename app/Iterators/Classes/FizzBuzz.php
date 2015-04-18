@@ -1,4 +1,4 @@
-<?PHP
+<?php
 namespace Iterators\Classes;
 
 class FizzBuzz implements \Iterator

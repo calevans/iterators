@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 class Miata implements \ArrayAccess
 {

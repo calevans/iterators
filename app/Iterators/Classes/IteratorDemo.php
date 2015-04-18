@@ -1,4 +1,4 @@
-<?PHP
+<?php
 namespace Iterators\Classes;
 
 class IteratorDemo implements \Iterator, \Countable

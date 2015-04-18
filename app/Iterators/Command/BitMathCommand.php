@@ -1,4 +1,4 @@
-<?PHP
+<?php
 namespace Iterators\Command;
 
 use Iterators\Classes\PrettyBits;

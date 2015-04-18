@@ -1,4 +1,4 @@
-<?PHP
+<?php
 return [
     "Boober",
     "Gobo",

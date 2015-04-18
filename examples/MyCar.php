@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 class MyCar extends ArrayIterator
 {

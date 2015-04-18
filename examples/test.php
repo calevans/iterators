@@ -1,4 +1,4 @@
-<?PHP
+<?php
 $dwarves = [
     1 => 'Grumpy',
     2 => 'Happy',
