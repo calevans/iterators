@@ -3,7 +3,6 @@ namespace Iterators\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface as OutputInterface;
 
 class RecursiveCommand extends Command
@@ -22,7 +21,7 @@ class RecursiveCommand extends Command
         InputInterface $input,
         OutputInterface $output
     ) {
-        $characters = include '../examples/southparkCharacters.php';
+        $characters = include __DIR__ . '/../../../examples/southparkCharacters.php';
 
         $output->writeln("Source Array:");
         print_r($characters);

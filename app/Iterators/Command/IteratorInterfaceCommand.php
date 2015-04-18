@@ -1,6 +1,7 @@
 <?php
 namespace Iterators\Command;
 
+use Iterators\Classes\IteratorDemo;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
 use Symfony\Component\Console\Output\OutputInterface as OutputInterface;
@@ -20,7 +21,7 @@ class IteratorInterfaceCommand extends Command
         InputInterface $input,
         OutputInterface $output
     ) {
-        $iteratableClass = new \Iterators\Classes\IteratorDemo();
+        $iteratableClass = new IteratorDemo();
 
         if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
             $iteratableClass->setVerbose(true);

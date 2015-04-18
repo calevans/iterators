@@ -1,9 +1,9 @@
 <?php
 namespace Iterators\Command;
 
+use GuzzleHttp\Client;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface as OutputInterface;
 
 class GeneratorCommand extends Command
@@ -22,9 +22,8 @@ class GeneratorCommand extends Command
         InputInterface $input,
         OutputInterface $output
     ) {
-        \Guzzle\Http\StaticClient::mount();
-
-        $commits = \Guzzle::get('https://api.github.com/repos/php/php-src/commits')->json();
+        $client = new Client();
+        $commits = $client->get('https://api.github.com/repos/php/php-src/commits')->json();
         $commitGenerator = $this->gatherCommits($commits, $output->getVerbosity());
 
         /*
@@ -53,7 +52,8 @@ class GeneratorCommand extends Command
         foreach ($gatheredComits as $thisCommit) {
 
             if (!isset($committers[$thisCommit['author']['id']])) {
-                $committers[$thisCommit['author']['id']] = \Guzzle::get('https://api.github.com/user/' . $thisCommit['author']['id'])->json();
+                $client = new Client();
+                $committers[$thisCommit['author']['id']] = $client->get('https://api.github.com/user/' . $thisCommit['author']['id'])->json();
             }
 
             $payload = ['commit' => $thisCommit, 'committer' => $committers[$thisCommit['author']['id']]];
@@ -71,4 +71,3 @@ class GeneratorCommand extends Command
         }
     }
 }
-

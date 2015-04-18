@@ -1,6 +1,7 @@
 <?php
 namespace Iterators\Command;
 
+use Iterators\Classes\DwarfIterator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -26,7 +27,7 @@ class OuterIteratorCommand extends Command
     ) {
         $filter = substr((string)$input->getOption('filter'), 0, 1);
         $dwarves = ['Grumpy ', 'Happy ', 'Sleepy ', 'Bashful ', 'Sneezy ', 'Dopey ', 'Doc '];
-        $dwarfIterator = new \Iterators\Classes\DwarfIterator(new \ArrayIterator($dwarves), $filter);
+        $dwarfIterator = new DwarfIterator(new \ArrayIterator($dwarves), $filter);
 
         foreach ($dwarfIterator as $thisDwarf) {
             $output->writeln($thisDwarf);
