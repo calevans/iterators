@@ -1,10 +1,11 @@
-<?PHP
-class  Car 
+<?php
+
+class Car
 {
-	protected property cylinders    = 4;
-	protected property color        = 'black';
-	protected property doors        = 2;
-	protected property convertable  = true;
-	protected property transmission = 'manual';
-	protected property seats        = 2;
+    protected $cylinders = 4;
+    protected $color = 'black';
+    protected $doors = 2;
+    protected $convertable = true;
+    protected $transmission = 'manual';
+    protected $seats = 2;
 }
