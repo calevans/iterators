@@ -4,7 +4,6 @@ namespace Iterators\Command;
 use Iterators\Classes\SeekableIterator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface as OutputInterface;
 
 class SeekCommand extends Command
@@ -23,7 +22,7 @@ class SeekCommand extends Command
         InputInterface $input,
         OutputInterface $output
     ) {
-        $fraggles = include '../examples/fraggles.php';
+        $fraggles = include __DIR__ . '/../../../examples/fraggles.php';
 
         $fraggleIterator = new SeekableIterator($fraggles, false);
 
