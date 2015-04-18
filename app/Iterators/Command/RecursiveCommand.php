@@ -1,11 +1,10 @@
 <?PHP
 namespace Iterators\Command;
- 
+
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface as OutputInterface;
-use Iterators\Classes\SeekableIterator;
 
 class RecursiveCommand extends Command
 {
@@ -14,25 +13,26 @@ class RecursiveCommand extends Command
     {
 
         $this->setName("recursive")
-             ->setDescription("Demonstrate a Recrusive Iterator")
-             ->setHelp("Iterate over a multi-dimensional array using ther RecursiveIteratorIterator");
+            ->setDescription("Demonstrate a Recrusive Iterator")
+            ->setHelp("Iterate over a multi-dimensional array using ther RecursiveIteratorIterator");
     }
 
 
-    protected function execute(InputInterface $input, 
-                               OutputInterface $output)
-    {
-		$characters = include '../examples/southparkCharacters.php';
+    protected function execute(
+        InputInterface $input,
+        OutputInterface $output
+    ) {
+        $characters = include '../examples/southparkCharacters.php';
 
-		$output->writeln("Source Array:");
-		print_r($characters);
+        $output->writeln("Source Array:");
+        print_r($characters);
 
-		$output->writeln("Iterator Output");
-		$iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($characters));
+        $output->writeln("Iterator Output");
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($characters));
 
-		foreach ($iterator as $key => $value) {
-		    $output->writeln($key . " : " . $value);;
-		}
+        foreach ($iterator as $key => $value) {
+            $output->writeln($key . " : " . $value);;
+        }
 
         $output->writeln("Done");
         return;
