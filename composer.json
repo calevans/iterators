@@ -9,7 +9,7 @@
   ],
   "require": {
     "symfony/console": "~2.0",
-    "guzzle/guzzle": "~5.0"
+    "guzzlehttp/guzzle": "~5.2"
   },
   "autoload": {
     "psr-0": {
