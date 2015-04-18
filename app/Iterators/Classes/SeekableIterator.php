@@ -81,7 +81,7 @@ class SeekableIterator implements \Iterator, \Countable
         $position = rand(0, count($this->data) - 1);
 
         if (!isset($this->data[$position])) {
-            throw new OutOfBoundsException("invalid seek position ($pointer)");
+            throw new \OutOfBoundsException("invalid seek position ($position)");
         }
 
         $this->pointer = $position;
