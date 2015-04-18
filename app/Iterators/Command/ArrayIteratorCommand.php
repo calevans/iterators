@@ -21,7 +21,7 @@ class ArrayIteratorCommand extends Command
         InputInterface $input,
         OutputInterface $output
     ) {
-        $fraggles = include '../examples/fraggles.php';
+        $fraggles = include __DIR__ . '/../../../examples/fraggles.php';
         $arrayIterator = new \ArrayIterator($fraggles);
 
         // Print the array
@@ -51,7 +51,7 @@ class ArrayIteratorCommand extends Command
         return;
     }
 
-    public function emperorFirst($a, $b)
+    public function emperorFirst($a)
     {
         return (substr($a, 0, 3) == "Emp" ? 0 : 1);
     }
