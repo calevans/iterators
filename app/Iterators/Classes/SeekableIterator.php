@@ -1,101 +1,101 @@
-<?PHP
+<?php
 namespace Iterators\Classes;
 
-class SeekableIterator implements  \Iterator, \Countable
+class SeekableIterator implements \Iterator, \Countable
 {
-	
-	protected $data = [];
-	protected $verbose    = false;
-	protected $pointer    = -1;
 
-	function __construct($data,$verbose=false) 
-	{
-		$this->setVerbose($verbose);
-		$this->data=$data;
-	}
+    protected $data = [];
+    protected $verbose = false;
+    protected $pointer = -1;
 
-
-	public function count()
-	{
-		if ($this->verbose) {
-			echo "-- Count\n";
-		}
-		return count($this->data);
-	}
+    function __construct($data, $verbose = false)
+    {
+        $this->setVerbose($verbose);
+        $this->data = $data;
+    }
 
 
-	public function key()
-	{
-		if ($this->verbose) {
-			echo "-- Key\n";
-		}
-		return $this->pointer;
-	}
+    public function count()
+    {
+        if ($this->verbose) {
+            echo "-- Count\n";
+        }
+        return count($this->data);
+    }
 
 
-	public function next()
-	{
-		if ($this->verbose) {
-			echo "-- Next\n";
-		}
-
-		$this->pointer++;
-		
-		return;
-	}
+    public function key()
+    {
+        if ($this->verbose) {
+            echo "-- Key\n";
+        }
+        return $this->pointer;
+    }
 
 
-	public function rewind()
-	{
-		if ($this->verbose) {
-			echo "-- Rewind\n";
-		}
-		$this->pointer=0;
+    public function next()
+    {
+        if ($this->verbose) {
+            echo "-- Next\n";
+        }
 
-		return;
-	}
+        $this->pointer++;
 
-
-	public function valid()
-	{
-		if ($this->verbose) {
-			echo "-- Valid\n";
-		}
-
-		return isset($this->data[$this->pointer]);
-	}
+        return;
+    }
 
 
-	public function current()
-	{
-		if ($this->verbose) {
-			echo "-- Current\n";
-		}
-		return $this->data[$this->pointer];
-	}
+    public function rewind()
+    {
+        if ($this->verbose) {
+            echo "-- Rewind\n";
+        }
+        $this->pointer = 0;
+
+        return;
+    }
 
 
-	public function seek($position) 
-	{
+    public function valid()
+    {
+        if ($this->verbose) {
+            echo "-- Valid\n";
+        }
 
-		$position = rand(0,count($this->data)-1);
+        return isset($this->data[$this->pointer]);
+    }
 
-		if (!isset($this->data[$position])) {
-		  throw new OutOfBoundsException("invalid seek position ($pointer)");
-		}
 
-		$this->pointer = $position;
+    public function current()
+    {
+        if ($this->verbose) {
+            echo "-- Current\n";
+        }
+        return $this->data[$this->pointer];
+    }
 
-		return;
-	}
 
-	/*
-	 * Not part of the Seekable interface
-	 */
-	public function setVerbose($newValue=false)
-	{
-		$this->verbose = (bool)$newValue;
-		return;
-	}
+    public function seek($position)
+    {
+
+        $position = rand(0, count($this->data) - 1);
+
+        if (!isset($this->data[$position])) {
+            throw new \OutOfBoundsException("invalid seek position ($position)");
+        }
+
+        $this->pointer = $position;
+
+        return;
+    }
+
+    /*
+     * Not part of the Seekable interface
+     */
+    public function setVerbose($newValue = false)
+    {
+        $this->verbose = (bool)$newValue;
+        return;
+    }
 
 }

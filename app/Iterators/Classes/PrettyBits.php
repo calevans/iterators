@@ -1,7 +1,7 @@
-<?PHP
+<?php
 namespace Iterators\Classes;
 
-class PrettyBits 
+class PrettyBits
 {
 
     public static function printIt($number)
@@ -29,17 +29,17 @@ class PrettyBits
     public static function printTableLine($number)
     {
 
-        $output = str_pad($number,7, ' ',STR_PAD_LEFT);
+        $output = str_pad($number, 7, ' ', STR_PAD_LEFT);
         $output .= ' ';
-        
-        $binary = str_pad(strrev(decbin($number)),14,'0');
 
-        for($lcvA=0; $lcvA<strlen($binary);$lcvA++) {
-            $output .= '|' . str_pad($binary[$lcvA],4,' ',STR_PAD_LEFT);
+        $binary = str_pad(strrev(decbin($number)), 14, '0');
+
+        for ($lcvA = 0; $lcvA < strlen($binary); $lcvA++) {
+            $output .= '|' . str_pad($binary[$lcvA], 4, ' ', STR_PAD_LEFT);
         }
 
         $output .= '|';
-        echo $output ."\n";
+        echo $output . "\n";
         return;
     }
 }

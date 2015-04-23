@@ -1,4 +1,4 @@
-<?PHP
+<?php
 namespace Iterators\Command;
 
 use Iterators\Classes\FizzBuzzFilter;
@@ -17,32 +17,32 @@ class FizzBuzzFilteredCommand extends Command
     	];
 
         $this->setName("fizzbuzzfiltered")
-		     ->setDescription("Filters input before outputting FizzBuzz")
-		     ->setDefinition($definition)
-		     ->setHelp("Simple demonstration of how to modify the input and output of an Iterator.");
-	}
+->setDescription("Filters input before outputting FizzBuzz")
+->setDefinition($definition)
+->setHelp("Simple demonstration of how to modify the input and output of an Iterator.");
+}
 
 
-    protected function execute(InputInterface $input, 
-							   OutputInterface $output)
-	{
-		$max = (int)$input->getOption('max');
-		$numbers = range(1, $max);
+protected function execute(InputInterface $input,
+OutputInterface $output)
+{
+$max = (int)$input->getOption('max');
+$numbers = range(1, $max);
 
-		$fizzBuzzFiltered = new \Iterators\Classes\FizzBuzzFilter($numbers);
+$fizzBuzzFiltered = new \Iterators\Classes\FizzBuzzFilter($numbers);
 
-		foreach($numbers as $thisNumber) {
-			$fizzBuzzFiltered[]=$thisNumber;
-		}
+foreach($numbers as $thisNumber) {
+$fizzBuzzFiltered[]=$thisNumber;
+}
 
-		$fizzBuzz = new \Iterators\Classes\FizzBuzz($fizzBuzzFiltered);
+$fizzBuzz = new \Iterators\Classes\FizzBuzz($fizzBuzzFiltered);
 
-		foreach($fizzBuzz as $thisNumber) {
-			$output->writeln("  ".$thisNumber);
-		} // foreach($iteratableClass as $committer)
+foreach($fizzBuzz as $thisNumber) {
+$output->writeln("  ".$thisNumber);
+} // foreach($iteratableClass as $committer)
 
-		$output->writeln("Done");
-		return;
-	}
+$output->writeln("Done");
+return;
+}
 
 }

@@ -9,7 +9,7 @@ foreach ($it as $v) {
 }
 $it->rewind();
 $it[3] = 'Cal';
-echo "The fourth letter of the alphabet is: ". $it[3] . PHP_EOL;
+echo "The fourth letter of the alphabet is: " . $it[3] . PHP_EOL;
 
 print_r($it);
 
