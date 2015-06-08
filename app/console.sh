@@ -16,5 +16,6 @@ $app->addCommands([new Command\ArrayIteratorCommand(),
 				   new Command\OuterIteratorCommand(),
                    new Command\DirectoryCommand(),
                    new Command\BitMathCommand(),
-                   new Command\SeekCommand]);
+                   new Command\SeekCommand(),
+                   new Command\RecursiveCommand]);
 $app->run();

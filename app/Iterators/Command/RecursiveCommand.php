@@ -21,7 +21,7 @@ class RecursiveCommand extends Command
         InputInterface $input,
         OutputInterface $output
     ) {
-        $characters = include __DIR__ . '/../../../examples/southparkCharacters.php';
+        $characters = include __DIR__ . '/../../../examples/southParkCharacters.php';
 
         $output->writeln("Source Array:");
         print_r($characters);
